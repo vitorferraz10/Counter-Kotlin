@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Counter(count: Int) {
 
-    var (valueCount, setValueCount) = remember {
+    val (valueCount, setValueCount) = remember {
         mutableStateOf(count)
     }
     fun removeCount() {
