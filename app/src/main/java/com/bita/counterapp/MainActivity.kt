@@ -12,23 +12,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.bita.counterapp.ui.theme.CounterAppTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CounterAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    Counter(0)
+                    ComponentCounter()
                 }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun DefaultPreview() {
     CounterAppTheme {
-        Counter(0)
+        ComponentCounter()
     }
 }
