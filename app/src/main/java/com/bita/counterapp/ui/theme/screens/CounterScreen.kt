@@ -1,35 +1,46 @@
 package com.bita.counterapp
-
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.bita.counterapp.viewModel.CounterViewModel
+import com.bita.counterapp.viewModel.ViewModelCount
 
 
-    @Composable
+class CounterMainActivity: ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+        setContent{
+            Surface {
+                ComponentCounter()
+            }
+
+        }
+
+    }
+
+}
+
+@Composable
     fun ComponentCounter(){
 
-         var actionsCounter = CounterViewModel()
-         var countNumberInit = 0
-
-        val (valueCount, setValueCount) = remember {
-            mutableStateOf(countNumberInit)
-        }
+    val countActions = ViewModelCount()
 
         Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
             Row(modifier = Modifier
                 .padding()
                 .fillMaxWidth(), horizontalArrangement = Arrangement.Center){
 
-                val countString = valueCount.toString()
+                val countString = countValue.toString()
 
-                Button(onClick = { setValueCount(actionsCounter.removeCount(valueCount)) }) { Text(text = "remove") }
+                CustomButtons("Remove")
 
                 Box(
                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp)
@@ -38,8 +49,11 @@ import com.bita.counterapp.viewModel.CounterViewModel
                     Text(text = countString, textAlign = TextAlign.Center)
                 }
 
-                Button(onClick = { setValueCount(actionsCounter.addCount(valueCount)) }) { Text(text = "Add") }
+                CustomButtons("Add")
 
             }
         }
     }
+
+
+
